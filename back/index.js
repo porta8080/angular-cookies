@@ -3,7 +3,7 @@ var cors = require('cors');
 var session = require('express-session');
 
 app.use(cors({
-  origin: ['http://localhost:3001'],
+  origin: ['http://localhost:3000'],
   credentials: true
 }));
 
@@ -18,6 +18,14 @@ app.get('/login',function(req,res){
 app.get('/check',function(req,res){
   res.json(req.session.user);
   console.log(req.session.user);
+});
+
+app.get('/login-back',function(req,res){
+  if(!req.session.user){
+    req.session.user = {created_at: Date.now()}
+  }
+
+  res.json(req.session.user);
 });
 
 app.listen(8080,function(){
