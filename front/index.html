@@ -1,0 +1,42 @@
+<html ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js'></script>
+  <script>
+  var app = angular.module('app', ['ngCookies']);
+  app.controller('MainController', ['$scope','$http', '$cookies',
+  function PhoneListController($scope,$http,$cookies){
+    $scope.login = function(){
+      $http({
+        method:'get',
+        url: 'http://localhost:8080/login',
+        withCredentials: true
+      })
+      .then(function(res){
+        console.log(res);
+      });
+    }
+
+    $scope.check = function(){
+      $http({
+        method:'get',
+        url: 'http://localhost:8080/check',
+        withCredentials: true
+      })
+      .then(function(res){
+        console.log(res);
+      });
+    }
+  }]);
+  </script>
+</head>
+<body ng-controller="MainController">
+  <button ng-click='login()'>Login</button>
+  <button ng-click='check()'>Check</button>
+</body>
+</html>
